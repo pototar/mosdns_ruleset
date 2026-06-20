@@ -1,0 +1,66 @@
+name: Auto Update and Extract Geodata
+
+on:
+  schedule:
+    # 每天北京时间上午 8:00 自动运行 (UTC 0:00)
+    - cron: '0 0 * * *'
+  workflow_dispatch: # 支持手动点击按钮触发运行
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write # 赋予工作流向仓库提交代码的权限
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Create Output Directory
+        run: |
+          # 创建存放结果的 list 文件夹
+          mkdir -p list
+
+      - name: Download Geoview and Dat Files
+        run: |
+          # 1. 动态获取 snowie2000/geoview 的最新 Linux 版本下载链接并下载
+          GEOVIEW_URL=$(curl -s https://api.github.com/repos/snowie2000/geoview/releases/latest | grep "browser_download_url" | grep "geoview-linux-amd64" | cut -d '"' -f 4)
+          curl -L -o geoview-linux-amd64 "$GEOVIEW_URL"
+          chmod +x geoview-linux-amd64
+
+          # 2. 下载 Loyalsoldier 的最新 dat 文件
+          curl -L -O https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/geoip.dat
+          curl -L -O https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/geosite.dat
+
+      - name: Extract Geodata Lists
+        run: |
+          # 避坑提示：Linux Bash 默认会将 ! 识别为历史命令展开符号
+          # 这里关闭历史展开，并对包含 ! 的分类加单引号包裹
+          set +H
+
+          ./geoview-linux-amd64 -type geoip -input geoip.dat -list cn -output ./list/geoip_cn.txt
+          ./geoview-linux-amd64 -type geoip -input geoip.dat -list private -output ./list/geoip_private.txt
+          ./geoview-linux-amd64 -type geosite -input geosite.dat -list gfw -output ./list/geosite_gfw.txt
+          ./geoview-linux-amd64 -type geosite -input geosite.dat -list cn -output ./list/geosite_cn.txt
+          ./geoview-linux-amd64 -type geosite -input geosite.dat -list 'geolocation-!cn' -output './list/geosite_geolocation-!cn.txt'
+          ./geoview-linux-amd64 -type geosite -input geosite.dat -list category-ads-all -output ./list/geosite_category-ads-all.txt
+
+      - name: Clean Temporary Files
+        run: |
+          # 保持仓库干净，删掉下载的工具和原始大文件，只保留生成的 txt
+          rm -f geoview-linux-amd64 geoip.dat geosite.dat
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # 只有当测出 txt 内容有变动时才提交，防止刷无意义的 commit 历史
+          if [ -n "$(git status --porcelain list)" ]; then
+            git add list/
+            git commit -m "auto: update geodata lists $(date +'%Y-%m-%d %H:%M:%S')"
+            git push
+          else
+            echo "No changes detected in geodata lists."
+          fi
