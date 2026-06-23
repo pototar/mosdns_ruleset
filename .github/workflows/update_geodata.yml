@@ -17,11 +17,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Create Output Directory
-        run: |
-          # 创建存放结果的 list 文件夹
-          mkdir -p list
-
       - name: Download Geoview and Dat Files
         run: |
           # 1. 动态获取 snowie2000/geoview 的最新 Linux 版本下载链接并下载
@@ -39,12 +34,12 @@ jobs:
           # 这里关闭历史展开，并对包含 ! 的分类加单引号包裹
           set +H
 
-          ./geoview-linux-amd64 -type geoip -input geoip.dat -list cn -output ./list/geoip_cn.txt
-          ./geoview-linux-amd64 -type geoip -input geoip.dat -list private -output ./list/geoip_private.txt
-          ./geoview-linux-amd64 -type geosite -input geosite.dat -list gfw -output ./list/geosite_gfw.txt
-          ./geoview-linux-amd64 -type geosite -input geosite.dat -list cn -output ./list/geosite_cn.txt
-          ./geoview-linux-amd64 -type geosite -input geosite.dat -list 'geolocation-!cn' -output './list/geosite_geolocation-!cn.txt'
-          ./geoview-linux-amd64 -type geosite -input geosite.dat -list category-ads-all -output ./list/geosite_category-ads-all.txt
+          ./geoview-linux-amd64 -type geoip -input geoip.dat -list cn -output ./geoip_cn.txt
+          ./geoview-linux-amd64 -type geoip -input geoip.dat -list private -output ./geoip_private.txt
+          ./geoview-linux-amd64 -type geosite -input geosite.dat -list gfw -output ./geosite_gfw.txt
+          ./geoview-linux-amd64 -type geosite -input geosite.dat -list cn -output ./geosite_cn.txt
+          ./geoview-linux-amd64 -type geosite -input geosite.dat -list 'geolocation-!cn' -output './geosite_geolocation-!cn.txt'
+          ./geoview-linux-amd64 -type geosite -input geosite.dat -list category-ads-all -output ./geosite_category-ads-all.txt
 
       - name: Clean Temporary Files
         run: |
@@ -57,8 +52,8 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
           # 只有当测出 txt 内容有变动时才提交，防止刷无意义的 commit 历史
-          if [ -n "$(git status --porcelain list)" ]; then
-            git add list/
+          if [ -n "$(git status --porcelain *.txt)" ]; then
+            git add .
             git commit -m "auto: update geodata lists $(date +'%Y-%m-%d %H:%M:%S')"
             git push
           else
