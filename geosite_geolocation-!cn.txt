@@ -5996,6 +5996,7 @@ crazyxxx3dworld.org
 crazyxxxworld.com
 crbug.com
 crchina.org
+creader.com
 creaders.net
 creamasia.com
 creamlemon.info
@@ -7152,7 +7153,6 @@ dowjones.io
 dowjoneson.com
 download.com
 download.dappcdn.com
-download.visualstudio.microsoft.com
 downloadpass.com
 downloadsforipod.com
 dpool.top
