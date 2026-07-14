@@ -1321,7 +1321,6 @@ alefbank.com
 alexa.com
 alexanderstreet.com
 alfa.me
-alfabank.oavdo.amc
 alfabank.ru
 alfabank.st
 alfadirect.ru
@@ -5276,6 +5275,7 @@ chat.lmsys.org
 chatango.com
 chatgpt.com
 chatgpt.livekit.cloud
+chatgpt.site
 chatgptvideo.xyz
 chatgptvideob.buzz
 chatpdf.com
@@ -10265,7 +10265,6 @@ gongyichuangyi.net
 gonike.com
 gonzo-movies.com
 gonzo.com
-goo
 goo.gl
 goo.ne.jp
 gooblox.com
@@ -12529,7 +12528,6 @@ intagram.com
 intagrm.com
 intc.com
 integral7.com
-intel
 intel-research.net
 intel-university-collaboration.net
 intel.ac
@@ -13704,6 +13702,7 @@ khatrimaza.org
 khotruyentranhx.com
 kichiku-doujinko.com
 kichikuou.com
+kick.com
 kickporn.com
 kickshatchannel.com
 kicksnike1.com
@@ -13830,7 +13829,6 @@ kompozer.net
 konachan.com
 konachan.net
 konachan.wjcodes.com
-konami
 konami-igaming.online
 konami.co.jp
 konami.com
@@ -18930,11 +18928,7 @@ ppy.sh
 practicalbusinessskills.com
 practicalmoneyskills.ca
 practicalmoneyskills.jp
-practivate.adobe
 practivate.adobe.com
-practivate.adobe.ipp
-practivate.adobe.newoa
-practivate.adobe.ntp
 prastitutki.ru
 prayforchina.net
 prcleader.org
