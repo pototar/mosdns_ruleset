@@ -20164,6 +20164,7 @@ rutracker.me
 rutracker.net
 rutracker.nl
 rutracker.org
+rutracker.wiki
 rutrk.org
 rutube.ru
 rutube.sport
