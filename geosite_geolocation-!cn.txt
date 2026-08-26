@@ -790,6 +790,7 @@ adguard.info
 adguard.io
 adguard.org
 adguardaccount.com
+adguardaccount.net
 adguardcdn.com
 adguardvpn.com
 adhelpnews.com
@@ -1846,6 +1847,7 @@ aod-pod-uk-live.akamaized.net
 aodahl.com
 aofriend.com
 aokwholesale.net
+aolcdn.com
 aomedia.org
 aomiwang.com
 aorus.com
@@ -17845,6 +17847,7 @@ ourshdtv.com
 ourshemales.com
 oursteps.com.au
 ourtv.hk
+ouryahoo.com
 out-app-purchase.com
 outbound.io
 outdoorpublicsex.com
@@ -26363,6 +26366,7 @@ yahooapis.com
 yahoodns.net
 yahoofinance.com
 yahoohealth.com
+yahooinc.com
 yahoomusic.com
 yahoosandbox.com
 yahoosportsbook.com
